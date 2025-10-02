@@ -1,0 +1,206 @@
+/* ============ Reset ============ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root{
+  --bg-page: #0f1113;
+  --panel:   #1b1d1f;      /* panel oscuro */
+  --text:    #ffffff;
+  --muted:   #9aa3ab;
+  --muted-2: #cbd5e1;
+  --chip:    #6f757c;
+  --price:   #bef264;
+  --popular: #f6c768;
+  --sold:    #ed735d;
+  --shadow:  0 20px 60px rgba(0,0,0,.45);
+}
+
+body{
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg-page);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 80px 20px;
+}
+
+/* quitamos cualquier fondo global previo */
+.hero-bg{ display:none; }
+
+/* ============ Tarjeta contenedora (panel) ============ */
+.container{
+  max-width: 1160px;
+  margin: 0 auto;
+  position: relative;
+  background: var(--panel);
+  border-radius: 18px;
+  padding: 56px 48px 56px;
+  box-shadow: var(--shadow);
+  overflow: hidden;     /* para que el banner respete el borde */
+  isolation: isolate;   /* stacking correcto */
+}
+
+/* Banner decorativo detrás del título (como tu imagen) */
+.container::before{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  top:-155px;               /* más arriba que el título */
+  height:360px;             /* cubre por detrás del header */
+  background:
+    linear-gradient(to bottom, rgba(15,17,19,.15), rgba(27,29,31,.96) 78%),
+    url('bg-cafe.jpg') center/cover no-repeat;
+  z-index:0;                /* detrás del contenido */
+  border-radius: 18px;
+}
+
+/* ============ Header dentro del panel ============ */
+.header{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  margin-bottom:32px;
+}
+
+.header h1{
+  font-size: clamp(30px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.header p{
+  color: var(--muted-2);
+  font-size: 16px;
+  max-width: 720px;
+  margin: 0 auto 22px;
+  line-height: 1.6;
+}
+
+/* Botones (píldoras) */
+.filter-buttons{
+  position:relative;
+  z-index:1;
+  display:inline-flex;
+  gap:10px;
+  padding:6px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(6px);
+}
+
+.filter-btn{
+  padding: 10px 16px;
+  border:0;
+  background: transparent;
+  color:#e2e8f0;
+  font-size:14px;
+  font-weight:700;
+  border-radius:999px;
+  cursor:pointer;
+  transition: background .18s ease, transform .06s ease, color .18s ease;
+}
+.filter-btn:hover{ background: rgba(255,255,255,.08); transform: translateY(-1px); }
+.filter-btn.active{ background: var(--chip); color: #0f1113; }
+
+/* ============ Grid de cafés (más agrupado) ============ */
+.coffee-grid{
+  position:relative;
+  z-index:1; /* sobre el banner */
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px 16px;          /* juntas como en la imagen */
+  margin-top: 18px;
+}
+
+/* ============ Tarjeta individual (ligera, solo contenido) ============ */
+.coffee-card{
+  background: transparent;  /* el panel ya tiene fondo */
+  border-radius: 14px;
+  overflow: visible;
+}
+
+/* Imagen con esquinas redondeadas y sombra sutil */
+.card-image-wrapper{
+  position:relative;
+  width:100%;
+  height: 160px;            /* similar a la captura */
+  overflow:hidden;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 10px 26px rgba(0,0,0,.25);
+}
+.card-image{ width:100%; height:100%; object-fit: cover; }
+
+/* Badge Popular */
+.popular-badge{
+  position:absolute;
+  top:10px; left:10px;
+  background: var(--popular);
+  color:#111827;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: capitalize;
+}
+
+/* Texto debajo de la imagen */
+.card-content{ padding:0; }
+
+.card-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:10px;
+  margin-bottom: 6px;
+}
+
+.card-title{
+  font-size: 14px;
+  font-weight: 700;
+  color:#f8fafc;
+}
+
+.card-price{
+  background: var(--price);
+  color:#111827;
+  padding: 4px 9px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* Rating + estado */
+.card-rating{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  flex-wrap:wrap;
+}
+.stars{ font-size: 14px; line-height:1; }
+.rating-text{ color:#fef08a; font-weight:600; }
+.votes{ color: var(--muted); }
+.no-ratings{ color: var(--muted); display:flex; align-items:center; gap:4px; }
+.sold-out{ color: var(--sold); font-weight:700; margin-left:auto; }
+
+/* ============ Responsivo ============ */
+@media (max-width: 1100px){
+  .coffee-grid{ grid-template-columns: repeat(2, 1fr); gap: 16px 14px; }
+  .card-image-wrapper{ height: 170px; }
+}
+
+@media (max-width: 720px){
+  body{ padding: 56px 14px; }
+  .container{ padding: 42px 18px 36px; border-radius: 16px; }
+  .container::before{ top: -135px; height: 300px; }
+  .header h1{ font-size: 28px; }
+  .header p{ font-size: 15px; }
+  .coffee-grid{ grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px 12px; }
+  .card-image-wrapper{ height: 160px; }
+}
+
+
+
+
