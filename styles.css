@@ -22,10 +22,10 @@ body{
   padding: 80px 20px;
 }
 
-/* quitamos cualquier fondo global previo */
+
 .hero-bg{ display:none; }
 
-/* ============ Tarjeta contenedora (panel) ============ */
+/* Tarjeta contenedora (panel) */
 .container{
   max-width: 1160px;
   margin: 0 auto;
@@ -102,7 +102,7 @@ body{
 .filter-btn:hover{ background: rgba(255,255,255,.08); transform: translateY(-1px); }
 .filter-btn.active{ background: var(--chip); color: #0f1113; }
 
-/* ============ Grid de cafés (más agrupado) ============ */
+/* Grid de cafés (más agrupado)  */
 .coffee-grid{
   position:relative;
   z-index:1; /* sobre el banner */
@@ -112,7 +112,7 @@ body{
   margin-top: 18px;
 }
 
-/* ============ Tarjeta individual (ligera, solo contenido) ============ */
+/*  Tarjeta individual (ligera, solo contenido) */
 .coffee-card{
   background: transparent;  /* el panel ya tiene fondo */
   border-radius: 14px;
@@ -185,7 +185,7 @@ body{
 .no-ratings{ color: var(--muted); display:flex; align-items:center; gap:4px; }
 .sold-out{ color: var(--sold); font-weight:700; margin-left:auto; }
 
-/* ============ Responsivo ============ */
+/*  Responsivo  */
 @media (max-width: 1100px){
   .coffee-grid{ grid-template-columns: repeat(2, 1fr); gap: 16px 14px; }
   .card-image-wrapper{ height: 170px; }
